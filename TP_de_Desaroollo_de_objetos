@@ -1,0 +1,46 @@
+class Perro:  
+    def _init_(self, nombre, tamaño, raza, peso, estado_salud, vacunado, estado):  
+        self.nombre = nombre  
+        self.tamaño = tamaño  
+        self.raza = raza  
+        self.peso = peso  
+        self.estado_salud = estado_salud  
+        self.vacunado = vacunado  
+        self.estado = estado  
+
+    def cambiar_estado(self, nuevo_estado):  
+        self.estado = nuevo_estado  
+
+    def mostrar_info(self):  
+        return f"{self.nombre}, {self.tamaño}, {self.raza}, {self.peso}, Estado: {self.estado}"  
+
+
+class UsuarioAdoptante:  
+    def _init_(self, nombre, dni, email, preferencias):  
+        self.nombre = nombre  
+        self.dni = dni  
+        self.email = email  
+        self.preferencias = preferencias  
+        self.historial_adopciones = []  
+
+    def registrar_adopcion(self, perro):  
+        self.historial_adopciones.append(perro)  
+
+
+class SistemaAdopcion:  
+    def _init_(self):  
+        self.perros = []  
+        self.usuarios = []  
+
+    def agregar_perro(self, perro):  
+        self.perros.append(perro)  
+
+    def agregar_usuario(self, usuario):  
+        self.usuarios.append(usuario)   
+
+    def sugerir_perros(self, usuario):  
+        return [perro for perro in self.perros if perro.estado == "disponible" and  
+                (perro.raza in usuario.preferencias)]  
+
+    def mostrar_listado(self):  
+        return [perro.mostrar_info() for perro in self.perros if perro.estado == "disponible"]
